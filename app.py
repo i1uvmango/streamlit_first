@@ -1,57 +1,23 @@
 import streamlit as st
-import pandas as pd
-import numpy as np
-import time
 
-st.header('1. st.cache_data 사용 예시')
+st.title('간단한 퀴즈 서비스')
 
-# 캐싱 없는 데이터 로딩 함수
-def load_data_no_cache():
-    # 시간이 오래 걸리는 작업 시뮬레이션
-    time.sleep(2)
-    
-    # 샘플 데이터 생성
-    data = pd.DataFrame({
-        'A': np.random.randn(100),
-        'B': np.random.randn(100),
-        'C': np.random.randn(100)
-    })
-    
-    return data
+# 객관식 퀴즈
+st.header('객관식 퀴즈')
+mc_question = '한국의 수도는 어디인가요?'
+mc_options = ['서울', '부산', '대구', '인천']
+mc_answer = '서울'
+mc_user_answer = st.radio(mc_question, mc_options)
 
-# 캐싱을 사용하는 데이터 로딩 함수
-@st.cache_data
-def load_data_with_cache():
-    # 시간이 오래 걸리는 작업 시뮬레이션
-    time.sleep(2)
-    
-    # 샘플 데이터 생성
-    data = pd.DataFrame({
-        'A': np.random.randn(100),
-        'B': np.random.randn(100),
-        'C': np.random.randn(100)
-    })
-    
-    return data
+# 주관식 퀴즈
+st.header('주관식 퀴즈')
+sq_question = '파이썬의 창시자는 누구인가요?'
+sq_answer = '귀도 반 로섬'
+sq_user_answer = st.text_input(sq_question)
 
-# 데모 탭
-cache_tab1, cache_tab2 = st.tabs(["캐싱 없음", "캐싱 있음"])
-
-with cache_tab1:
-    st.subheader("캐싱 없음")
-    if st.button("데이터 로드 (캐싱 없음)"):
-        with st.spinner("데이터 로딩 중..."):
-            data = load_data_no_cache()
-            st.success("데이터 로딩 완료!")
-            st.dataframe(data.head())
-
-with cache_tab2:
-    st.subheader("캐싱 있음")
-    if st.button("데이터 로드 (캐싱 있음)"):
-        with st.spinner("데이터 로딩 중..."):
-            data = load_data_with_cache()
-            st.success("데이터 로딩 완료!")
-            st.dataframe(data.head())
-            st.info("두 번째 실행부터는 즉시 결과가 표시됩니다.") 
-
-print("ㄴㄱㅁ")
+# 정답 확인 버튼
+if st.button('정답 확인'):
+    mc_result = '정답입니다!' if mc_user_answer == mc_answer else '틀렸습니다!'
+    sq_result = '정답입니다!' if sq_user_answer.strip() == sq_answer else '틀렸습니다!'
+    st.write(f'객관식 퀴즈 결과: {mc_result}')
+    st.write(f'주관식 퀴즈 결과: {sq_result}')
