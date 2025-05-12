@@ -52,4 +52,6 @@ with cache_tab2:
             data = load_data_with_cache()
             st.success("데이터 로딩 완료!")
             st.dataframe(data.head())
-            st.info("두 번째 실행부터는 즉시 결과가 표시됩니다.")
+            st.info("두 번째 실행부터는 즉시 결과가 표시됩니다.") 
+
+print("ㄴㄱㅁ")
