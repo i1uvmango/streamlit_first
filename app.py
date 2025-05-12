@@ -12,7 +12,7 @@ mc_user_answer = st.radio(mc_question, mc_options)
 # 주관식 퀴즈
 st.header('주관식 퀴즈')
 sq_question = '파이썬의 창시자는 누구인가요?'
-sq_answer = '귀도 반 로섬'
+sq_answer = '귀도 반 로섬' or 'Guido van Rossum' or '귀도 반 로썸' 
 sq_user_answer = st.text_input(sq_question)
 
 # 정답 확인 버튼
